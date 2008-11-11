@@ -1,16 +1,15 @@
 CC = gcc
-CFLAGS = -W -Wall -ansi -pedantic -I../include
+CFLAGS = -W -Wall -ansi -pedantic -I../include -MD
 AR = ar rs
-LIBPQUEUE_OBJS = pqueue.o
-LIBPQUEUE_LIB = libpqueue.a
-ALL_LIBS = $(LIBPQUEUE_LIB)
+OBJS = pqueue.o
+LIB = libm3.a
 
-default: $(ALL_LIBS)
+default: $(LIB)
 
-$(LIBPQUEUE_LIB): $(LIBPQUEUE_OBJS)
-	$(AR) $(LIBPQUEUE_LIB) $(LIBPQUEUE_OBJS)
+$(LIB): $(OBJS)
+	$(AR) $(LIB) $(OBJS)
 
 .PHONY: clean
 
 clean:
-	rm -f $(LIBPQUEUE_OBJS) $(LIBPQUEUE_LIB) $(LIBPQUEUE_OBJS:%.o=%.d)
+	rm -f $(LIB) $(OBJS) $(OBJS:%.o=%.d)
