@@ -1,6 +1,6 @@
 #include <pqueue.h>
 
-#include <errno.h>
+#include <assert.h>
 #include <stdlib.h>
 
 struct pqueue {
@@ -47,27 +47,22 @@ static void pqueue_trickle_down(struct pqueue* q) {
 /*****************************************************************************/
 struct pqueue* pqueue_create(pqueue_compare f) {
 	struct pqueue* q = malloc(sizeof(struct pqueue*));
-	if (!q) {
-		return NULL;
-	}
+
+	assert(q != NULL);
 
 	q->f = f;
 	q->n = 0;
 	q->s = 4;
 	q->a = malloc(sizeof(void*) * q->s);
-	if (!q->a) {
-		free(q);
-		return NULL;
-	}
+	
+	assert(q->a != NULL);
 
 	return q;
 }
 
 /*****************************************************************************/
 void pqueue_destroy(struct pqueue* q) {
-	if (!q) {
-		return;
-	}
+	assert(q != NULL);
 
 	if (q->a) {
 		free(q->a);
@@ -76,16 +71,12 @@ void pqueue_destroy(struct pqueue* q) {
 }
 
 /*****************************************************************************/
-int pqueue_insert(struct pqueue* q, void* v) {
-	if (!q) {
-		return EINVAL;
-	}
+void pqueue_insert(struct pqueue* q, void* v) {
+	assert(q != NULL);
 
 	if (q->n == q->s) {
 		void** a = realloc(q->a, q->s * 2);
-		if (!a) {
-			return errno;
-		}
+		assert(a != NULL);
 
 		q->a = a;
 		q->s *= 2;
@@ -96,26 +87,34 @@ int pqueue_insert(struct pqueue* q, void* v) {
 
 	pqueue_bubble_up(q);
 
-	return 0;
+	return;
 }
 
 /*****************************************************************************/
-int pqueue_pop(struct pqueue* q, void** r) {
-	if (!r) {
-		return EINVAL;
-	}
-
-	*r = 0;
-
-	if (!q || !q->n) {
-		return EINVAL;
-	}
-	
-	*r = q->a[0];
+void* pqueue_pop(struct pqueue* q) {
+	assert(q != NULL);
+	assert(q->s != 0);
 
 	q->n--;
-	q->a[0] = q->a[q->n];
+
+	SWAP(0, q->n);
+
 	pqueue_trickle_down(q);
 	
-	return 0;
+	return q->a[q->n];
+}
+
+/*****************************************************************************/
+void* pqueue_peek(const struct pqueue* q) {
+	assert(q != NULL);
+	assert(q->s != 0);
+
+	return q->a[0];
+}
+
+/*****************************************************************************/
+int pqueue_is_empty(const struct pqueue* q) {
+	assert(q != NULL);
+
+	return q->s;
 }

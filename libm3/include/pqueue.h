@@ -10,8 +10,10 @@ struct pqueue;
 typedef int (*pqueue_compare)(void* a, void* b);
 
 struct pqueue* pqueue_create(pqueue_compare);
-void pqueue_destroy(struct pqueue*);
-int pqueue_insert(struct pqueue*, void*);
-int pqueue_pop(struct pqueue*, void**);
+void           pqueue_destroy(struct pqueue*);
+void           pqueue_insert(struct pqueue*, void*);
+void*          pqueue_pop(struct pqueue*);
+void*          pqueue_peek(const struct pqueue*);
+int            pqueue_is_empty(const struct pqueue*);
 
 #endif
