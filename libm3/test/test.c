@@ -12,7 +12,15 @@ char* debug_func = "";
 void debug_func_hit() {
 }
 
-int run_test(test_func f, char* tname, int out_fd, int err_fd) {
+int run_test(test_func f, char* tname, FILE* outfile) {
+#ifdef T_NO_FORK
+	int status;
+
+	if (!(status = f(tname, outfile))) {
+		fprintf(outfile, "\t[%s:PASS]\n", tname);
+	}
+	return status;
+#else
 	pid_t pid;
 	int status;
 	if (strcmp(tname, debug_func) == 0) {
@@ -22,12 +30,9 @@ int run_test(test_func f, char* tname, int out_fd, int err_fd) {
 		waitpid(pid, &status, 0);
 		return status;
 	} else {
-		close(1);
-		dup(out_fd);
-		close(2);
-		dup(err_fd);
-		f(tname);
-		fprintf(stdout, "\t[%s:PASS]\n", tname);
+		f(tname, outfile);
+		fprintf(outfile, "\t[%s:PASS]\n", tname);
 		exit(0);
 	}
+#endif
 }

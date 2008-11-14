@@ -1,8 +1,12 @@
 CC = gcc
-CFLAGS = -W -g -Wall -ansi -pedantic -I../include -MMD
+CFLAGS = -W -g -Wall -pedantic -I../include -MMD 
 OBJS = pqueue_test.o main.o test.o
 LIBS = ../lib/libm3.a
 BINARY = libm3_test
+
+ifneq (undefined, $(origin NOFORK))
+CFLAGS := $(CFLAGS) -DT_NO_FORK
+endif
 
 all: $(BINARY)
 
