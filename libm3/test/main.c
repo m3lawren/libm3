@@ -8,5 +8,7 @@ int main(void) {
 	npass = nfail = 0;
 
 	pqueue_tests(&npass, &nfail);
+
+	printf("%d/%d tests passed\n", npass, npass + nfail);
 	return 0;
 }

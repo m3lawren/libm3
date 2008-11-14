@@ -2,31 +2,45 @@
 
 #include "test.h"
 
-int comp(void* a, void* b) {
-	return (int)a - (int)b;
+static int comp(void* a, void* b) {
+	return (int)a < (int)b;
 }
 
-T_TEST(basic_fail) {
+T_TEST(t_pqueue_basic) {
+	struct pqueue* q = pqueue_create(comp);
+	
+	T_ASSERT(q != NULL);
+
+	pqueue_destroy(q);
 }
 
-T_TEST(basic_pass) {
-}
+T_TEST(t_pqueue_inorder_insert) {
+	struct pqueue* q = pqueue_create(comp);
+	int i;
 
-T_TEST(basic_assert_pass) {
-	T_ASSERT(1 == 1, "This should not have failed.");
-}
+	T_ASSERT(q);
 
-T_TEST(basic_assert_fail) {
-	T_ASSERT(1 == 0, "Expected failure!");
+	for (i = 0; i < 10; i++) {
+		pqueue_insert(q, (void*)i);
+	}
+
+	T_ASSERT(!pqueue_is_empty(q));
+
+	i = 0;
+	while (!pqueue_is_empty(q)) {
+		T_ASSERT(i == (int)pqueue_peek(q));
+		T_ASSERT(i == (int)pqueue_pop(q));
+		i++;
+	}
+
+	T_ASSERT(i == 10);
 }
 
 T_SUITE(pqueue_tests) {
-	T_INIT_SUITE(pqueue_tests); 
+	T_INIT_SUITE(pqueue_tests);
 
-	T_ADD_TEST(basic_fail)
-	T_ADD_TEST(basic_pass)
-	T_ADD_TEST(basic_assert_fail);
-	T_ADD_TEST(basic_assert_pass);
+	T_ADD_TEST(t_pqueue_basic);
+	T_ADD_TEST(t_pqueue_inorder_insert);
 
 	T_END_SUITE;
 }

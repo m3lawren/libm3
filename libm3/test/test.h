@@ -20,8 +20,8 @@ int run_test(test_func f, char* tname, int out_fd, int err_fd);
 /*
  * Test-related functions.
  */
-#define T_TEST(name) void _t_##name(char* tname)
+#define T_TEST(name) static void _t_##name(char* tname)
 #define T_INIT_TEST(name) 
-#define T_ASSERT(x, m) if (!(x)) { fprintf(stdout, "\t[%s:FAIL] %s:%d %s\n", tname, __FILE__, __LINE__, m); exit(1); }
+#define T_ASSERT(x) if (!(x)) { fprintf(stdout, "\t[%s:FAIL] %s:%d %s\n", tname, __FILE__, __LINE__, #x); exit(1); }
 
 #endif
