@@ -12,6 +12,8 @@ T_TEST(t_pqueue_basic) {
 	T_ASSERT(q != NULL);
 
 	pqueue_destroy(q);
+
+	T_END_TEST;
 }
 
 T_TEST(t_pqueue_inorder_insert) {
@@ -34,6 +36,8 @@ T_TEST(t_pqueue_inorder_insert) {
 	}
 
 	T_ASSERT(i == 10);
+
+	T_END_TEST;
 }
 
 T_SUITE(pqueue_tests) {
