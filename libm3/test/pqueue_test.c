@@ -37,6 +37,8 @@ T_TEST(t_pqueue_inorder_insert) {
 
 	T_ASSERT(i == 10);
 
+	pqueue_destroy(q);
+
 	T_END_TEST;
 }
 

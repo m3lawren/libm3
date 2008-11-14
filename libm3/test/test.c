@@ -32,6 +32,7 @@ int run_test(test_func f, char* tname, FILE* outfile) {
 	} else {
 		f(tname, outfile);
 		fprintf(outfile, "\t[%s:PASS]\n", tname);
+		fclose(outfile);
 		exit(0);
 	}
 #endif
