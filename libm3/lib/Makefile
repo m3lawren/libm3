@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -W -Wall -ansi -pedantic -I../include -MD
+CFLAGS = -g -W -Wall -ansi -pedantic -I../include -MD
 AR = ar rs
 OBJS = pqueue.o
 LIB = libm3.a

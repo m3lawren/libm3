@@ -46,7 +46,7 @@ static void pqueue_trickle_down(struct pqueue* q) {
 
 /*****************************************************************************/
 struct pqueue* pqueue_create(pqueue_compare f) {
-	struct pqueue* q = malloc(sizeof(struct pqueue*));
+	struct pqueue* q = malloc(sizeof(struct pqueue));
 
 	assert(q != NULL);
 
@@ -75,7 +75,7 @@ void pqueue_insert(struct pqueue* q, void* v) {
 	assert(q != NULL);
 
 	if (q->n == q->s) {
-		void** a = realloc(q->a, q->s * 2);
+		void** a = realloc(q->a, q->s * 2 * sizeof(void*));
 		assert(a != NULL);
 
 		q->a = a;
