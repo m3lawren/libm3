@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+extern char* debug_func;
+void debug_func_hit();
+
 typedef void (*test_func)(char*);
 
 int run_test(test_func f, char* tname, int out_fd, int err_fd);
