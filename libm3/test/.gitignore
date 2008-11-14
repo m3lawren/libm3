@@ -1,0 +1,3 @@
+*.d
+*.o
+libm3_test
