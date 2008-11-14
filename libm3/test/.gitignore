@@ -1,3 +1,4 @@
 *.d
 *.o
+.*.sw*
 libm3_test
