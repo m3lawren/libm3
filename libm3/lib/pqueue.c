@@ -34,12 +34,14 @@ static void pqueue_trickle_down(struct pqueue* q) {
 
 	while (LC(i) < q->n) {
 		unsigned long wc = LC(i);
-		if (RC(i) < q->n && q->f(q->a[RC(i)], q->a[RC(i)])) {
+		if (RC(i) < q->n && q->f(q->a[RC(i)], q->a[LC(i)])) {
 			wc = RC(i);
 		}
 		if (q->f(q->a[wc], q->a[i])) {
 			SWAP(wc, i);
 			i = wc;
+		} else {
+			break;
 		}
 	}
 }
@@ -116,5 +118,5 @@ void* pqueue_peek(const struct pqueue* q) {
 int pqueue_is_empty(const struct pqueue* q) {
 	assert(q != NULL);
 
-	return q->s;
+	return q->n == 0;
 }
