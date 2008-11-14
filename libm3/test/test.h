@@ -14,7 +14,7 @@ int run_test(test_func f, char* tname, int out_fd, int err_fd);
  */
 #define T_SUITE(name) void name(int* npass, int* nfail)
 #define T_INIT_SUITE(name) char* sname = #name; int init_nfail = *nfail; int out_fds[2]; int err_fds[2]; pipe(out_fds); pipe(err_fds);
-#define T_END_SUITE { char buf[256]; int amt_read; if (*nfail == init_nfail) { fprintf(stdout, "[%s:FAIL]", sname); } else { fprintf(stdout, "[%s:PASS]\n", sname); } close(out_fds[1]); close(err_fds[1]); while ((amt_read = read(out_fds[0], buf, 256))) { fwrite(buf, 1, amt_read, stdout); } }
+#define T_END_SUITE { close(out_fds[1]); close(err_fds[1]); if (*nfail != init_nfail) { char buf[256]; int amt_read; fprintf(stdout, "[%s:FAIL]\n", sname); while ((amt_read = read(out_fds[0], buf, 256))) { fwrite(buf, 1, amt_read, stdout); } } else { fprintf(stdout, "[%s:PASS]\n", sname); } close(out_fds[0]); close(err_fds[0]);}
 #define T_ADD_TEST(name) if (run_test(_t_##name, #name, out_fds[1], err_fds[1])) { (*nfail)++; } else { (*npass)++; }
 
 /*
