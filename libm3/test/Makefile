@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -W -g -Wall -pedantic -I../include -MMD 
-OBJS = pqueue_test.o main.o test.o
+OBJS = pqueue_test.o main.o
 LIBS = ../lib/libm3.a
 BINARY = libm3_test
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "test.h"
+#include <test.h>
 
 void pqueue_tests(int*, int*);
 

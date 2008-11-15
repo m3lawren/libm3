@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -g -W -Wall -ansi -pedantic -I../include -MD
 AR = ar rs
-OBJS = pqueue.o
+OBJS = pqueue.o test.o
 LIB = libm3.a
 
 default: $(LIB)

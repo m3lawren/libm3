@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include "test.h"
+#include <test.h>
 
 char* debug_func = "";
 

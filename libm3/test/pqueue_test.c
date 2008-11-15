@@ -1,6 +1,6 @@
 #include <pqueue.h>
 
-#include "test.h"
+#include <test.h>
 
 static int comp(void* a, void* b) {
 	return (int)a < (int)b;
