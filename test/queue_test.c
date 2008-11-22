@@ -9,8 +9,7 @@ T_TEST(t_queue_basic) {
 	T_ASSERT(queue_is_empty(q));
 	queue_destroy(q);
 
-	T_END_TEST;
-}
+} T_END_TEST
 
 T_TEST(t_queue_insert) {
 	int num = 16;
@@ -31,14 +30,11 @@ T_TEST(t_queue_insert) {
 
 	queue_destroy(q);
 
-	T_END_TEST;
-}
+} T_END_TEST
 
 T_SUITE(queue_tests) {
-	T_INIT_SUITE(queue_tests);
 	
 	T_ADD_TEST(t_queue_basic);
 	T_ADD_TEST(t_queue_insert);
 
-	T_END_SUITE;
-}
+} T_END_SUITE
