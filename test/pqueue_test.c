@@ -13,8 +13,7 @@ T_TEST(t_pqueue_basic) {
 
 	pqueue_destroy(q);
 
-	T_END_TEST;
-}
+} T_END_TEST
 
 T_TEST(t_pqueue_inorder_insert) {
 	struct pqueue* q = pqueue_create(comp);
@@ -39,14 +38,11 @@ T_TEST(t_pqueue_inorder_insert) {
 
 	pqueue_destroy(q);
 
-	T_END_TEST;
-}
+} T_END_TEST
 
 T_SUITE(pqueue_tests) {
-	T_INIT_SUITE(pqueue_tests);
 
 	T_ADD_TEST(t_pqueue_basic);
 	T_ADD_TEST(t_pqueue_inorder_insert);
 
-	T_END_SUITE;
-}
+} T_END_SUITE
