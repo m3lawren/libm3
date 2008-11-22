@@ -13,6 +13,7 @@ struct queue;
  * _is_empty - Returns non-zero if the queue is empty.
  */
 struct queue*  queue_create();
+void           queue_destroy(struct queue*);
 int            queue_push(struct queue*, void*);
 void*          queue_pop(struct queue*);
 int            queue_is_empty(struct queue*);

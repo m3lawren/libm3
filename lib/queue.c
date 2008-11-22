@@ -26,6 +26,18 @@ struct queue* queue_create() {
 }
 
 /*****************************************************************************/
+void queue_destroy(struct queue* q) {
+	if (!q) {
+		return;
+	}
+
+	if (q->a) {
+		free(q->a);
+	}
+	free(q);
+}
+
+/*****************************************************************************/
 int queue_push(struct queue* q, void* v) {
 	unsigned int nidx;
 
