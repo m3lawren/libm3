@@ -4,6 +4,7 @@
 #include <test.h>
 
 void pqueue_tests(int*, int*);
+void queue_tests(int*, int*);
 
 int main(int argc, char** argv) {
 	int npass, nfail;
@@ -14,6 +15,7 @@ int main(int argc, char** argv) {
 	}
 
 	pqueue_tests(&npass, &nfail);
+	queue_tests(&npass, &nfail);
 
 	printf("%d/%d tests passed\n", npass, npass + nfail);
 	return 0;
