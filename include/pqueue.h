@@ -17,6 +17,7 @@ typedef int (*pqueue_compare)(void* a, void* b);
 /*
  * _create   - Creates a new priority queue with the given comparator function.
  * _insert   - Inserts a given element into the queue. Duplicates are allowed.
+ *             Returns 0 on success.
  * _pop      - Removes the highest priority element from the queue.
  * _peek     - Returns the highest priority element in the queue, but does not
  *             modify the queue in any way.
@@ -24,7 +25,7 @@ typedef int (*pqueue_compare)(void* a, void* b);
  */
 struct pqueue* pqueue_create(pqueue_compare);
 void           pqueue_destroy(struct pqueue*);
-void           pqueue_insert(struct pqueue*, void*);
+int            pqueue_insert(struct pqueue*, void*);
 void*          pqueue_pop(struct pqueue*);
 void*          pqueue_peek(const struct pqueue*);
 int            pqueue_is_empty(const struct pqueue*);

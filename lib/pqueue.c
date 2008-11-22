@@ -73,12 +73,15 @@ void pqueue_destroy(struct pqueue* q) {
 }
 
 /*****************************************************************************/
-void pqueue_insert(struct pqueue* q, void* v) {
+int pqueue_insert(struct pqueue* q, void* v) {
 	assert(q != NULL);
 
 	if (q->n == q->s) {
 		void** a = realloc(q->a, q->s * 2 * sizeof(void*));
-		assert(a != NULL);
+
+		if (!a) {
+			return 1;
+		}
 
 		q->a = a;
 		q->s *= 2;
@@ -89,7 +92,7 @@ void pqueue_insert(struct pqueue* q, void* v) {
 
 	pqueue_bubble_up(q);
 
-	return;
+	return 0;
 }
 
 /*****************************************************************************/

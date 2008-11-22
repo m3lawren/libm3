@@ -22,7 +22,7 @@ T_TEST(t_pqueue_inorder_insert) {
 	T_ASSERT(q);
 
 	for (i = 0; i < 10; i++) {
-		pqueue_insert(q, (void*)i);
+		T_ASSERT(0 == pqueue_insert(q, (void*)i));
 	}
 
 	T_ASSERT(!pqueue_is_empty(q));
@@ -46,8 +46,8 @@ T_TEST(t_pqueue_duplicate) {
 
 	T_ASSERT(q);
 
-	pqueue_insert(q, v);
-	pqueue_insert(q, v);
+	T_ASSERT(0 == pqueue_insert(q, v));
+	T_ASSERT(0 == pqueue_insert(q, v));
 
 	T_ASSERT(!pqueue_is_empty(q));
 	T_ASSERT(v == pqueue_peek(q));
