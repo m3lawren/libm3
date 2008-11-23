@@ -21,8 +21,8 @@ $(BINARY): $(OBJS) $(LIBS)
 
 -include *.d
 
-.PHONY: clean
+.PHONY: clean_impl
 
-clean:
+clean_impl:
 	@make -C ../lib clean
 	rm -f $(OBJS) $(BINARY) $(OBJS:%.o=%.d)

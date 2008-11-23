@@ -1,2 +1,8 @@
 tags
 *.a
+*.d
+*.o
+*.gcda
+*.gcno
+*.gcov
+.*.sw*
