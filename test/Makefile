@@ -14,7 +14,7 @@ endif
 all: $(BINARY)
 
 $(BINARY): $(OBJS) $(LIBS)
-	$(CC) -g -o $(BINARY) $(OBJS) $(LIBS)
+	$(CC) $(LDFLAGS) -o $(BINARY) $(OBJS) $(LIBS)
 
 ../lib/libm3.a:
 	@make -C ../lib
