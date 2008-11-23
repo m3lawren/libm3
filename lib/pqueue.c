@@ -64,8 +64,9 @@ struct pqueue* pqueue_create(pqueue_compare f) {
 
 /*****************************************************************************/
 void pqueue_destroy(struct pqueue* q) {
-	assert(q != NULL);
-
+	if (!q) {
+		return;
+	}
 	if (q->a) {
 		free(q->a);
 	}
