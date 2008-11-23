@@ -59,7 +59,7 @@ int queue_push(struct queue* q, void* v) {
 
 		/* If we were wrapping before, we need to unwrap. Since we're doubling,
 		 * we know that we have enough space to do this. */
-		if (q->sz) {
+		if (q->sz && q->idx) {
 			memcpy(&na[q->sz], na, q->idx * sizeof(void*));
 		}
 		
