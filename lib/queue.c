@@ -94,6 +94,14 @@ void* queue_pop(struct queue* q) {
 }
 
 /*****************************************************************************/
+void* queue_peek(struct queue* q) {
+	assert(q != NULL);
+	assert(!queue_is_empty(q));
+
+	return q->a[q->idx];
+}
+
+/*****************************************************************************/
 int queue_is_empty(struct queue* q) {
 	assert(q != NULL);
 

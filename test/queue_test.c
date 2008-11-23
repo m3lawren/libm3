@@ -23,6 +23,7 @@ T_TEST(t_queue_insert) {
 
 	for (i = 0; i < num; i++) {
 		T_ASSERT(!queue_is_empty(q));
+		T_ASSERT(i == (int)queue_peek(q));
 		T_ASSERT(i == (int)queue_pop(q));
 	}
 
