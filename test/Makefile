@@ -3,6 +3,7 @@
 LIBS = ../lib/libm3.a
 BINARY = libm3_test
 OBJS = \
+array_test.o\
 main.o\
 pqueue_test.o\
 queue_test.o
