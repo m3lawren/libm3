@@ -39,7 +39,7 @@ void array_destroy(struct array* a) {
 /*****************************************************************************/
 int array_reserve(struct array* a, unsigned int sz) {
 	void** newa;
-	unsigned int nsz = sz ? sz : 1;
+	unsigned int nsz = a->sz ? a->sz : 1;
 
 	assert(a != NULL);
 
@@ -51,7 +51,7 @@ int array_reserve(struct array* a, unsigned int sz) {
 		nsz <<= 1;
 	}
 
-	newa = realloc(a->a, nsz);
+	newa = realloc(a->a, nsz * sizeof(void*));
 
 	if (!newa) {
 		return -1;
