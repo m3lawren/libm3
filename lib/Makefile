@@ -1,6 +1,5 @@
-CC = gcc
-CFLAGS = -g -W -Wall -ansi -pedantic -I../include -MD
-AR = ar rs
+-include ../Makefile.def
+
 OBJS = pqueue.o queue.o test.o
 LIB = libm3.a
 

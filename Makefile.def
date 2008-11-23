@@ -1,0 +1,3 @@
+CC = gcc
+AR = ar rs
+CFLAGS = -W -Wall -Werror -I../include -MD
