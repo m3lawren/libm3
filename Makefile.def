@@ -7,4 +7,4 @@ default: all
 
 .PHONY: clean
 clean: clean_impl
-	@rm -f $(OBJS:%.o=%.gcov) $(OBJS:%.o=%.gcda) $(OBJS:%.o=%.gcno)
+	@rm -f $(OBJS:%.o=%.c.gcov) $(OBJS:%.o=%.gcda) $(OBJS:%.o=%.gcno)
