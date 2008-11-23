@@ -6,13 +6,9 @@
 void pqueue_tests(int*, int*);
 void queue_tests(int*, int*);
 
-int main(int argc, char** argv) {
+int main() {
 	int npass, nfail;
 	npass = nfail = 0;
-
-	if (argc != 1) {
-		debug_func = argv[1];
-	}
 
 	pqueue_tests(&npass, &nfail);
 	queue_tests(&npass, &nfail);

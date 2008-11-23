@@ -25,13 +25,6 @@ int run_test(test_func f, char* tname, FILE*);
  */
 #define T_TEST(name) static int _t_##name(char* _tname, FILE* _output) {
 #define T_END_TEST return 0; }
-#define T_ASSERT(x) if (!(x)) { fprintf(_output, "\t[%s:FAIL] %s:%d %s\n", _tname, __FILE__, __LINE__, #x); _T_BAILOUT; }
-
-
-#ifdef T_NO_FORK
-#define _T_BAILOUT return 1
-#else
-#define _T_BAILOUT exit(1)
-#endif
+#define T_ASSERT(x) if (!(x)) { fprintf(_output, "\t[%s:FAIL] %s:%d %s\n", _tname, __FILE__, __LINE__, #x); return 1; }
 
 #endif
