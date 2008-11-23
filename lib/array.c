@@ -125,7 +125,7 @@ int array_insert(struct array* a, void* v, unsigned int i) {
 		return result;
 	}
 
-	memmove(&a->a[i + 1], &a->a[i], (i - a->num) * sizeof(void*));
+	memmove(&a->a[i + 1], &a->a[i], (a->num - i - 1) * sizeof(void*));
 
 	a->a[i] = v;
 
