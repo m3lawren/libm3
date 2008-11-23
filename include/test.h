@@ -24,7 +24,7 @@ int run_test(test_func f, char* tname, FILE*);
  * Test-related functions.
  */
 #define T_TEST(name) static int _t_##name(char* _tname, FILE* _output) {
-#define T_END_TEST return 0; }
+#define T_END_TEST (void)_tname; (void)_output; return 0; }
 #define T_ASSERT(x) if (!(x)) { fprintf(_output, "\t[%s:FAIL] %s:%d %s\n", _tname, __FILE__, __LINE__, #x); return 1; }
 
 #endif
