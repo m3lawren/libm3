@@ -1,6 +1,6 @@
 CC = gcc
 AR = ar rs
-CFLAGS = -g -W -Wall -Werror -I../include -MD
+CFLAGS = -g -W -Wall -Werror -I../include -MMD
 LDFLAGS = -g
 
 default: all
