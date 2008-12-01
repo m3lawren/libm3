@@ -1,6 +1,6 @@
 #include <queue.h>
 
-#include <assert.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -26,22 +26,26 @@ struct queue* queue_create() {
 }
 
 /*****************************************************************************/
-void queue_destroy(struct queue* q) {
+int queue_destroy(struct queue* q) {
 	if (!q) {
-		return;
+		return EINVAL;
 	}
 
 	if (q->a) {
 		free(q->a);
 	}
 	free(q);
+
+	return 0;
 }
 
 /*****************************************************************************/
 int queue_push(struct queue* q, void* v) {
 	unsigned int nidx;
 
-	assert(q != NULL);
+	if (q == NULL) {
+		return EINVAL;
+	}
 
 	if (q->num == q->sz) {
 		unsigned int nsz = q->sz << 1;
@@ -54,7 +58,7 @@ int queue_push(struct queue* q, void* v) {
 		na = realloc(q->a, nsz * sizeof(void*));	
 
 		if (!na) {
-			return -1;
+			return ENOMEM;
 		}
 
 		/* If we were wrapping before, we need to unwrap. Since we're doubling,
@@ -78,32 +82,56 @@ int queue_push(struct queue* q, void* v) {
 }
 
 /*****************************************************************************/
-void* queue_pop(struct queue* q) {
-	void* r; 
+int queue_pop(struct queue* q, void** ret) {
+	if (ret == NULL) {
+		return EINVAL;
+	}
 
-	assert(q != NULL);
-	assert(!queue_is_empty(q));
+	*ret = NULL;
 
-	r = q->a[q->idx];
+	if (q == NULL) {
+		return EINVAL;
+	}
+	if (queue_is_empty(q)) {
+		return EINVAL;
+	}
+
+	*ret = q->a[q->idx];
 
 	q->idx++;
 	q->idx %= q->sz;
 	q->num--;
 
-	return r;
+	return 0;
 }
 
 /*****************************************************************************/
-void* queue_peek(struct queue* q) {
-	assert(q != NULL);
-	assert(!queue_is_empty(q));
+int queue_peek(struct queue* q, void** ret) {
+	if (ret == NULL) {
+		return EINVAL;
+	}
+	
+	*ret = NULL;
 
-	return q->a[q->idx];
+	if (q == NULL) {
+		return EINVAL;
+	}
+	if (queue_is_empty(q)) {
+		return EINVAL;
+	}
+
+	*ret = q->a[q->idx];
+
+	return 0;
 }
 
 /*****************************************************************************/
 int queue_is_empty(struct queue* q) {
-	assert(q != NULL);
-
-	return q->num == 0;
+	if (q == NULL) {
+		return 1;
+	}
+	if (q->num == 0) {
+		return 1;
+	}
+	return 0;
 }
