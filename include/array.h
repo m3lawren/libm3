@@ -24,12 +24,12 @@ struct array;
  *            Returns 0 on success.
  */
 struct array* array_create();
-void          array_destroy(struct array*);
+int           array_destroy(struct array*);
 int           array_reserve(struct array*, unsigned int);
 int           array_resize(struct array*, unsigned int);
 unsigned int  array_size(const struct array*);
-void          array_set(struct array*, unsigned int, void*);
-void*         array_get(const struct array*, unsigned int);
+int           array_set(struct array*, unsigned int, void*);
+int           array_get(const struct array*, unsigned int, void**);
 int           array_append(struct array*, void*);
 int           array_insert(struct array*, void*, unsigned int);
 

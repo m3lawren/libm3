@@ -1,6 +1,7 @@
 #include <array.h>
 
 #include <assert.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -25,15 +26,17 @@ struct array* array_create() {
 }
 
 /*****************************************************************************/
-void array_destroy(struct array* a) {
+int array_destroy(struct array* a) {
 	if (!a) {
-		return;
+		return EINVAL;
 	}
 
 	if (a->a) {
 		free(a->a);
 	}
 	free(a);
+
+	return 0;
 }
 
 /*****************************************************************************/
@@ -41,7 +44,9 @@ int array_reserve(struct array* a, unsigned int sz) {
 	void** newa;
 	unsigned int nsz = a->sz ? a->sz : 1;
 
-	assert(a != NULL);
+	if (!a) {
+		return EINVAL;
+	}
 
 	if (a->sz >= sz) {
 		return 0;
@@ -54,7 +59,7 @@ int array_reserve(struct array* a, unsigned int sz) {
 	newa = realloc(a->a, nsz * sizeof(void*));
 
 	if (!newa) {
-		return -1;
+		return ENOMEM;
 	}
 
 	a->a = newa;
@@ -67,7 +72,9 @@ int array_reserve(struct array* a, unsigned int sz) {
 int array_resize(struct array* a, unsigned int num) {
 	int result;
 
-	assert(a != NULL);
+	if (a == NULL) {
+		return EINVAL;
+	}
 
 	if (num < a->num) {
 		a->num = num;
@@ -86,30 +93,51 @@ int array_resize(struct array* a, unsigned int num) {
 
 /******************************************************************************/
 unsigned int array_size(const struct array* a) {
-	assert(a != NULL);
+	if (!a) {
+		return 0;
+	}
 
 	return a->num;
 }
 
 /*****************************************************************************/
-void array_set(struct array* a, unsigned int i, void* v) {
-	assert(a != NULL);
-	assert(i < a->num);
+int array_set(struct array* a, unsigned int i, void* v) {
+	if (a == NULL) {
+		return EINVAL;
+	}
+	if (i >= a->num) {
+		return EINVAL;
+	}
 
 	a->a[i] = v;
+	return 0;
 }
 
 /*****************************************************************************/
-void* array_get(const struct array* a, unsigned int i) {
-	assert(a != NULL);
-	assert(i < a->num);
+int array_get(const struct array* a, unsigned int i, void** ret) {
+	if (ret == NULL) {
+		return EINVAL;
+	}
 
-	return a->a[i];
+	*ret = NULL;
+
+	if (a == NULL) {
+		return EINVAL;
+	}
+	if (i >= a->num) {
+		return EINVAL;
+	}
+
+	*ret = a->a[i];
+
+	return 0;
 }
 
 /*****************************************************************************/
 int array_append(struct array* a, void* v) {
-	assert(a != NULL);
+	if (a == NULL) {
+		return EINVAL;
+	}
 
 	return array_insert(a, v, a->num);
 }
@@ -118,8 +146,12 @@ int array_append(struct array* a, void* v) {
 int array_insert(struct array* a, void* v, unsigned int i) {
 	int result;
 
-	assert(a != NULL);
-	assert(i <= a->num);
+	if (a == NULL) {
+		return EINVAL;
+	}
+	if (i > a->num) {
+		return EINVAL;
+	}
 
 	if ((result = array_resize(a, a->num + 1))) {
 		return result;

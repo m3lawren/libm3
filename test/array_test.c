@@ -52,7 +52,9 @@ T_TEST(t_array_setget) {
 	T_ASSERT(num == array_size(a));
 
 	for (i = 0; i < num; i++) {
-		T_ASSERT(num - i == (unsigned int)array_get(a, i));
+		unsigned int x;
+		T_ASSERT(0 == array_get(a, i, (void**)&x));
+		T_ASSERT(num - i == x);
 	}
 	
 	T_ASSERT(num == array_size(a));
@@ -60,7 +62,9 @@ T_TEST(t_array_setget) {
 	T_ASSERT(num >> 1 == array_size(a));
 
 	for (i = 0; i < num >> 1; i++) {
-		T_ASSERT(num - i == (unsigned int)array_get(a, i));
+		unsigned int x;
+		T_ASSERT(0 == array_get(a, i, (void**)&x));
+		T_ASSERT(num - i == x); 
 	}
 
 	array_destroy(a);
@@ -78,14 +82,18 @@ T_TEST(t_array_insertappend) {
 
 	for (i = 0; i < num * 2; i++) {
 		if (i % 2 == 1) {
-			T_ASSERT(0 == array_insert(a, array_get(a, i - 1), i));
+			unsigned int x;
+			T_ASSERT(0 == array_get(a, i - 1, (void**)&x));
+			T_ASSERT(0 == array_insert(a, (void*)x, i));
 		}
 	}
 
 	T_ASSERT(num * 2 == array_size(a));
 
 	for (i = 0; i < num * 2; i++) {
-		T_ASSERT(i >> 1 == (unsigned int)array_get(a, i));
+		unsigned int x;
+		T_ASSERT(0 == array_get(a, i, (void**)&x));
+		T_ASSERT(i >> 1 == x);
 	}
 
 	for (i = 0; i < num; i++) {
@@ -95,10 +103,12 @@ T_TEST(t_array_insertappend) {
 	T_ASSERT(num * 3 == array_size(a));
 
 	for (i = 0; i < num * 3; i++) {
+		unsigned int x;
+		T_ASSERT(0 == array_get(a, i, (void**)&x));
 		if (i < num * 2) {
-			T_ASSERT(i >> 1 == (unsigned int)array_get(a, i));
+			T_ASSERT(i >> 1 == x);
 		} else {
-			T_ASSERT(i - num == (unsigned int)array_get(a, i));
+			T_ASSERT(i - num == x);
 		}
 	}
 
