@@ -1,7 +1,7 @@
 CC = gcc
 AR = ar rs
-CFLAGS = -g -W -Wall -Werror -I../include -MMD
-LDFLAGS = -g
+CFLAGS = -g -W -Wall -Werror -I../include -MMD -fprofile-arcs -ftest-coverage
+LDFLAGS = -g -fprofile-arcs -ftest-coverage
 
 default: all
 

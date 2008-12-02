@@ -42,7 +42,7 @@ int array_destroy(struct array* a) {
 /*****************************************************************************/
 int array_reserve(struct array* a, unsigned int sz) {
 	void** newa;
-	unsigned int nsz = a->sz ? a->sz : 1;
+	unsigned int nsz;
 
 	if (!a) {
 		return EINVAL;
@@ -50,7 +50,9 @@ int array_reserve(struct array* a, unsigned int sz) {
 
 	if (a->sz >= sz) {
 		return 0;
-	}
+	} 
+	
+	nsz = a->sz ? a->sz : 1;
 
 	while (nsz < sz) {
 		nsz <<= 1;
