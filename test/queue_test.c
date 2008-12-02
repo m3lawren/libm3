@@ -43,6 +43,8 @@ T_TEST(t_errors) {
 
 	/* queue_is_empty tests */
 	T_ASSERT(1 == queue_is_empty(NULL));
+
+	T_ASSERT(0 == queue_destroy(q));
 } T_END_TEST
 
 T_TEST(t_queue_insert) {
