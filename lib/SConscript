@@ -1,0 +1,10 @@
+Import('env')
+
+srcs = [
+	'array.c',
+	'pqueue.c',
+	'queue.c',
+	'test.c',
+]
+
+env.Library('m3', srcs)
