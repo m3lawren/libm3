@@ -15,6 +15,6 @@ int main() {
 	pqueue_tests(&npass, &nfail);
 	queue_tests(&npass, &nfail);
 
-	printf("%d/%d tests passed\n", npass, npass + nfail);
+	printf("All suites run, %d/%d tests passed\n", npass, npass + nfail);
 	return 0;
 }

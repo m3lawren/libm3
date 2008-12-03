@@ -10,8 +10,15 @@
 int run_test(test_func f, char* tname, FILE* outfile) {
 	int status;
 
+	fprintf(outfile, "  Running test %s...", tname);
+	fflush(outfile);
 	if (!(status = f(tname, outfile))) {
-		fprintf(outfile, "\t[%s:PASS]\n", tname);
+		int n = strlen("  Running test ...") + strlen(tname); 
+		fputc('\r', outfile);
+		while (n--) {
+			fputc(' ', outfile);
+		}
+		fputc('\r', outfile);
 	}
 	return status;
 }
