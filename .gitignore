@@ -6,3 +6,4 @@ tags
 *.gcno
 *.gcov
 .*.sw*
+.sconsign*
