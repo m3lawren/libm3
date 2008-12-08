@@ -13,7 +13,7 @@ struct queue;
  * _peek     - Returns the element at the front of the queue.
  * _is_empty - Returns non-zero if the queue is empty.
  */
-struct queue*  queue_create();
+struct queue*  queue_create(void);
 int            queue_destroy(struct queue*);
 int            queue_push(struct queue*, void*);
 int            queue_pop(struct queue*, void**);

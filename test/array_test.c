@@ -75,7 +75,7 @@ T_TEST(t_array_resize) {
 } T_END_TEST
 
 T_TEST(t_array_setget) {
-	struct array* a = array_create(a);
+	struct array* a = array_create();
 	unsigned int i, num = 17;
 
 	T_ASSERT(0 == array_resize(a, num));
@@ -107,7 +107,7 @@ T_TEST(t_array_setget) {
 } T_END_TEST
 
 T_TEST(t_array_insertappend) {
-	struct array* a = array_create(a);
+	struct array* a = array_create();
 	unsigned int i, num = 5;
 
 	T_ASSERT(0 == array_resize(a, num));

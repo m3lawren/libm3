@@ -23,7 +23,7 @@ struct array;
  *            moving all elements after that index to the right to make room.
  *            Returns 0 on success.
  */
-struct array* array_create();
+struct array* array_create(void);
 int           array_destroy(struct array*);
 int           array_reserve(struct array*, unsigned int);
 int           array_resize(struct array*, unsigned int);

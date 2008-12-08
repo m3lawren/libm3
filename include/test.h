@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 extern char* debug_func;
-void debug_func_hit();
+void debug_func_hit(void);
 
 typedef int (*test_func)(char*, FILE*);
 
